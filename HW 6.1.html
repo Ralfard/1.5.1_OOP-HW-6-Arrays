@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width='device-width', initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #mainContent{
+            margin: auto;
+            width: 50%;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+        }
+        #mainContent div{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            border: 1px solid black;
+        }
+        #form{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        #need_to_buy img{
+            position: relative;
+            top: 3px;
+        }
+        select{
+            margin: 5px;
+        }
+        li{
+            margin-left: -10px;
+        }
+        button{
+            margin-top: 5px;
+        }
+    </style>
+</head>
+<body>
+    <!-- 
+        Task 1
+        Создать массив «Список покупок». Каждый элемент массива
+        является объектом, который содержит название продукта, необ-
+        ходимое количество и куплен или нет. Написать несколько функ-
+        ций для работы с таким массивом.
+        1. Вывод всего списка на экран таким образом, чтобы сначала
+        шли некупленные продукты, а потом – купленные.              // выполнил: и ввел список по умолчанию(что бы не вводить все каждый раз), а так же добавил форму с добавлением товаров в список
+        2. Добавление покупки в список. Учтите, что при добавлении
+        покупки с уже существующим в списке продуктом, необ-
+        ходимо увеличивать количество в существующей покупке,
+        а не добавлять новую.                                        // выполнил с багом: при добавлении продукта через форму, он добавляется, но он может добавиться в уже купленные товары если уже попадал в этот список ранее
+        3. Покупка продукта. Функция принимает название продукта
+        и отмечает его как купленный.                           //выполнил: покупки меняют статус при нажатии на иконку тележки
+     -->
+    <main id="mainContent">
+        <div class="col_1">
+            <h4>Не купленные товары</h4>
+            <ol id="need_to_buy">
+
+            </ol>
+        </div>
+        <div class="col_2">
+            <h4>Купленные товары</h4>
+            <ol id="purchased_goods">
+
+            </ol>
+        </div>
+    </main>
+    <div id="form">
+        <h4>Добавление товаров</h4>
+        <select name="" id="products_input">
+            <option data-indexvalue="Колбаса">Колбаса</option>
+            <option value="Хлеб">Хлеб</option>
+            <option value="Молоко">Молоко</option>
+            <option value="Тетрадь">Тетрадь</option>
+            <option value="Помидоры">Помидоры</option>
+            <option value="Кефир">Кефир</option>
+            <option value="Огурцы">Огурцы</option>
+            <option value="Кофе">Кофе</option>
+            <option value="Чай">Чай</option>
+            <option value="Гречка">Гречка</option>
+        </select>
+        <input id="quantity_input" type="number" style="width: 100px;" value="1">
+        <button>Добавить</button>
+    </div>
+    <script>
+        document.write('Task 1 <br>Создать массив «Список покупок». Каждый элемент массиваявляется объектом, который содержит название продукта, необходимое количество и куплен или нет. Написать несколько функций для работы с таким массивом.<br>1. Вывод всего списка на экран таким образом, чтобы сначала шли некупленные продукты, а потом – купленные.<br>2. Добавление покупки в список. Учтите, что при добавлении покупки с уже существующим в списке продуктом, необходимо увеличивать количество в существующей покупке, а не добавлять новую.<br> 3. Покупка продукта. Функция принимает название продукта и отмечает его как купленный.')
+        
+
+        var shopingList=new Array //будет содержать  объекты с продуктами
+        class Products{         // с его помощью мы добавляем через форму продукты
+            constructor(name, quantity, purchased,){
+                this.name=name;
+                this.quantity=quantity;
+                this.purchased=purchased;
+            }
+            
+        }
+        let product1=new Products("Колбаса", 1, false);     // товары находящиеся в списке по умолчанию
+        let product2=new Products("Молоко", 1, true);
+        let product3=new Products("Хлеб", 1, false);
+        let product4=new Products("Тетрадь", 5, true);
+        let product5=new Products("Помидоры", 10, false);
+        
+        
+        shopingList=[product1, product2, product3, product4, product5, ]; 
+        
+        function showList(list){// выводит список в списки
+            need_to_buy.innerHTML=""; // отчищают старые списки если они были
+            purchased_goods.innerHTML="";
+            
+            for(let i=0; i<list.length;++i){
+                if(list[i].purchased==false){// проходимся по списку товаров и выводим товары в списках в зависимости от значения objact.purchased
+                    need_to_buy.insertAdjacentHTML("beforeend","<li data-index="+i+">"+list[i].name+" "+list[i].quantity+"<img src='bx-cart.svg' alt='Купить'></li>")// data-index содержит в себе порядковый номер в массиве, с его помощью мы узнаем что нужно перенести из списка в список
+                }
+                else if(list[i].purchased==true)
+                purchased_goods.insertAdjacentHTML("beforeend", "<li data-index="+i+" style='text-decoration: line-through;'>"+list[i].name+" "+list[i].quantity+"</li>")
+            }
+            setButtons()// нужна для создания события(подробности в самой функции)
+        }
+        showList(shopingList)
+        
+        document.querySelector("button").onclick=function(){// создает новые продукты и добавляет их в список не купленных продуктов
+            let newObj=new Products(products_input.value, Number(quantity_input.value), false)// создает новый объект
+            for(i=0;i<shopingList.length;++i){
+                if(newObj.name==shopingList[i].name){// проверяем есть ли такой объект в массиве...
+                    shopingList[i].quantity+=Number(newObj.quantity)
+                    return showList(shopingList)// ...если есть добавляем колличество из формы к колличеству в списке
+                }
+            }
+            shopingList.push(newObj)//... если нет то создаем новый объект
+            showList(shopingList)
+            setButtons()//нужна для создания события(подробности в самой функции)
+        }
+
+        function setButtons(){
+            /*в ходе выполнения задания я столкнулся с проблемой,
+             я хотел создать массовый обработчик кликов на иконке, но каждый раз при переносе обьекта из списка в список обработчики слетали,
+             для этого я создал функцию и вызываю её каждый раз когда стираю старый список*/
+            let elems=document.querySelectorAll("#need_to_buy li img")
+            for(let elem of elems)
+                elem.addEventListener("click", function(event){
+                    shopingList[event.target.parentElement.dataset.index].purchased=true;// меняю статус 
+                    showList(shopingList)// заново вывожу список
+                });
+        }
+                
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        //недоделано, не придумал как увеличивать кол-во товаров если объект уже есть в списке
+
+        // var sausage={
+        //     name:"Колбаса",
+        //     quantity:1,
+        //     purchased:false
+        // }
+        // var milk={
+        //     name:"Молоко",
+        //     quantity:1,
+        //     purchased:true
+        // }
+        // var bread={
+        //     name:"Хлеб",
+        //     quantity:1,
+        //     purchased:false
+        // }
+        // var copybook={
+        //     name:"Тетрадь",
+        //     quantity:5,
+        //     purchased:true
+        // }
+        // var tomato={
+        //     name:"Помидоры",
+        //     quantity:10,
+        //     purchased:false
+        // }
+        // var list=new Array ()
+
+        // list=[sausage,milk,bread,copybook,tomato,]
+
+        
+
+
+        // class New_product {
+        //     constructor(name,quantity,purchased){
+        //         this.name=name;
+        //         this.quantity=quantity;
+        //         this.purchased=purchased;
+        //     }
+        //     add_to_list(){
+        //         for(let i=0;i!=list.length;++i){
+        //         if(new New_product(this.name,this.quantity,this.purchased)==list[i].name){
+        //             list[i].quantity+=New_product(this.quantity)
+        //         }
+        //     }
+                
+        //         list.push(new New_product(this.name,this.quantity,this.purchased))
+
+        //     }
+        // }
+
+        // var dumplings = new New_product("Пельмени", 32, false)
+        // dumplings.add_to_list();
+        // var bread = new New_product("Хлеб",1,false)
+        // bread.add_to_list();
+
+        // function show_list(obj){//функция вывода списка на экран
+        //     document.write("<h4>Не куплено:</h4>")
+        //     for(i=0;i!=obj.length;i++){//цикл по очередно выводит сначала не купленные товары...
+        //         if(list[i].purchased==false){// проверяет куплен товар или нет
+        //         document.write("<p style=\"margin: 0px;\">"+list[i].name+"\t"+list[i].quantity+" штук(а) </p><br>");
+        //         }
+        //     }
+        //     document.write("<h4>Куплено:</h4>")
+        //     for(i=0;i!=obj.length;i++){      //...затем купленные
+        //         if(list[i].purchased==true){// проверяет куплен товар или нет
+        //         document.write("<p style=\"text-decoration: line-through;margin: 0px;\">"+list[i].name+"\t"+list[i].quantity+" штук(а)</p><br>");
+        //         }
+        //     }
+        // }
+        // show_list(list)
+
+    </script>
+</body>
+</html>

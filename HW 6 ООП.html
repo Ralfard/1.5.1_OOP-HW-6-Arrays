@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JS_DZ_Module_2_Week_2</title>
+    <style>
+        
+    </style>
+</head>
+<body>
+
+
+
+    <script>
+        // Task 1
+        // Создать массив «Список покупок». Каждый элемент массива
+        // является объектом, который содержит название продукта, необ-
+        // ходимое количество и куплен или нет. Написать несколько функ-
+        // ций для работы с таким массивом.
+        // 1. Вывод всего списка на экран таким образом, чтобы сначала
+        // шли некупленные продукты, а потом – купленные.
+        // 2. Добавление покупки в список. Учтите, что при добавлении
+        // покупки с уже существующим в списке продуктом, необ-
+        // ходимо увеличивать количество в существующей покупке,
+        // а не добавлять новую.
+        // 3. Покупка продукта. Функция принимает название продукта
+        // и отмечает его как купленный.
+
+        //недоделано, не придумал как увеличивать кол-во товаров если объект уже есть в списке
+
+        // var sausage={
+        //     name:"Колбаса",
+        //     quantity:1,
+        //     purchased:false
+        // }
+        // var milk={
+        //     name:"Молоко",
+        //     quantity:1,
+        //     purchased:true
+        // }
+        // var bread={
+        //     name:"Хлеб",
+        //     quantity:1,
+        //     purchased:false
+        // }
+        // var copybook={
+        //     name:"Тетрадь",
+        //     quantity:5,
+        //     purchased:true
+        // }
+        // var tomato={
+        //     name:"Помидоры",
+        //     quantity:10,
+        //     purchased:false
+        // }
+        // var list=new Array ()
+
+        // list=[sausage,milk,bread,copybook,tomato,]
+
+        
+
+
+        // class New_product {
+        //     constructor(name,quantity,purchased){
+        //         this.name=name;
+        //         this.quantity=quantity;
+        //         this.purchased=purchased;
+        //     }
+        //     add_to_list(){
+        //         for(let i=0;i!=list.length;++i){
+        //         if(new New_product(this.name,this.quantity,this.purchased)==list[i].name){
+        //             list[i].quantity+=New_product(this.quantity)
+        //         }
+        //     }
+                
+        //         list.push(new New_product(this.name,this.quantity,this.purchased))
+
+        //     }
+        // }
+
+        // var dumplings = new New_product("Пельмени", 32, false)
+        // dumplings.add_to_list();
+        // var bread = new New_product("Хлеб",1,false)
+        // bread.add_to_list();
+
+        // function show_list(obj){//функция вывода списка на экран
+        //     document.write("<h4>Не куплено:</h4>")
+        //     for(i=0;i!=obj.length;i++){//цикл по очередно выводит сначала не купленные товары...
+        //         if(list[i].purchased==false){// проверяет куплен товар или нет
+        //         document.write("<p style=\"margin: 0px;\">"+list[i].name+"\t"+list[i].quantity+" штук(а) </p><br>");
+        //         }
+        //     }
+        //     document.write("<h4>Куплено:</h4>")
+        //     for(i=0;i!=obj.length;i++){//...затем купленные
+        //         if(list[i].purchased==true){// проверяет куплен товар или нет
+        //         document.write("<p style=\"text-decoration: line-through;margin: 0px;\">"+list[i].name+"\t"+list[i].quantity+" штук(а)</p><br>");
+        //         }
+        //     }
+        // }
+
+        // show_list(list)
+
+
+        // Task 2
+        // Создать массив, описывающий чек в магазине. Каждый эле-
+        // мент массива состоит из названия товара, количества и цены за
+        // единицу товара. Написать следующие функции.
+        // 1. Распечатка чека на экран.
+        // 2. Подсчет общей суммы покупки.
+        // 3. Получение самой дорогой покупки в чеке.
+        // 4. Подсчет средней стоимости одного товара в чеке.
+
+
+        // /////Начало области переменных\\\\\
+        // var sausage={
+        //     name:"Колбаса",  //товар
+        //     quantity:1,      //кол-во
+        //     cost:350,        //цена
+        // }
+        // var milk={
+        //     name:"Молоко",
+        //     quantity:2,
+        //     cost:45,
+        // }
+        // var bread={
+        //     name:"Хлеб",
+        //     quantity:2,
+        //     cost:25,
+        // }
+
+        // var check=new Array(sausage,milk,bread)
+        // /////Конец области переменных\\\\\
+        // /////Начало области функций\\\\\
+
+        // function show_check(arr){//Вывод в консоль всех товаров, их колличество и цена
+        //     console.log("Товар:\t\tкол-во:\tцена:\n")
+        //     for(i=0;i!=arr.length;++i){//перебирает каждый элемент массива
+        //         console.log(arr[i].name+"\t\t"+arr[i].quantity+"\t"+arr[i].cost)
+        //     }
+        // }
+
+        // function total_cost(arr){//расчет общей суммы покупки
+        //     let summ=0;
+        //     for(i=0;i!=arr.length;++i){//перебирает каждый элемент массива
+        //         summ+=(arr[i].cost*arr[i].quantity)
+        //     }
+        //     console.log("Общая сумма покупки:\t"+summ);
+        // }
+
+        // function max_cost(arr){//нахождение самого дорогого товара из списка
+        //     let x=arr[0]
+        //     for(i=1;i<arr.length;++i){//перебирает каждый элемент массива
+        //         if(x.cost<arr[i].cost){
+        //             x=arr[i]
+        //         }
+        //     }
+        //     console.log("Самый дорогой товар:\t"+x.name);
+        // }
+
+        // function average_price(arr){//расчет средней стоймости одного товара
+        //     let summ=0
+        //     let average
+        //     for(i=0;i!=arr.length;++i){//перебирает каждый элемент массива
+        //         summ+=arr[i].cost
+        //         average=summ/(i+1)
+        //     }
+        //     console.log("Средняя стоймость одного товара:"+average);
+        // }
+
+        // /////Конец области функций\\\\\
+
+        // //вывод результата функций в консоль
+        // show_check(check)//задание 1
+        // total_cost(check)//задание 2
+        // max_cost(check)//задание 3
+        // average_price(check)//задание 4
+
+
+
+
+        // Task 3
+        // Создать массив css-стилей (цвет, размер шрифта, выравнива-
+        // ние, подчеркивание и т. д.). Каждый элемент массива – это объ-
+        // ект, состоящий из двух свойств: название стиля и значение стиля.
+        // Написать функцию, которая принимает массив стилей и
+        // текст, и выводит этот текст с помощью document.write() в тегах
+        // <p></p>, добавив в открывающий тег атрибут style со всеми сти-
+        // лями, перечисленными в массиве.
+
+
+        // var color={//объекты с CSS свойствами
+        //     name:"color",
+        //     value:"red",
+        // }
+        // var font_size={
+        //     name:"font-size",
+        //     value:"30px",
+        // }
+        // var text_align={
+        //     name:"text-align",
+        //     value:"center",
+        // }
+        // var text_decoration={
+        //     name:"text-decoration",
+        //     value:"underline",
+        // }
+        // var text="Lorem ipsum dolor sit amet"//переменная хранящая текст
+        // var styles=new Array(color,font_size,text_align,text_decoration)//массив с CSS свойствами
+
+
+        // function custom_text(css,text){
+        //     document.write("<p style=\""+color.name+":"+color.value+";"+font_size.name+":"+font_size.value+";"+text_align.name+":"+text_align.value+";"+text_decoration.name+":"+text_decoration.value+";"+"\">"+text+"</p>")
+        // }
+
+        // custom_text(styles,text)//вызов функции
+
+
+
+
+        // Task 4
+        // Создать массив аудиторий академии. Объект-аудитория со-
+        // стоит из названия, количества посадочных мест (от 10 до 20) и
+        // названия факультета, для которого она предназначена.
+        // Написать несколько функций для работы с ним.
+        // 1. Вывод на экран всех аудиторий.
+        // 2. Вывод на экран аудиторий для указанного факультета.
+        // 3. Вывод на экран только тех аудиторий, которые подходят для
+        // переданной группы. Объект-группа состоит из названия,
+        // количества студентов и названия факультета.
+        // 4. Функция сортировки аудиторий по количеству мест.
+        // 5. Функция сортировки аудиторий по названию (по алфавиту)
+
+        //недоделано,
+        
+        // var academy=new Array(
+        // {name:"auditorium1", places:14, faculty:"Химия",},
+        // {name:"auditorium2", places:20, faculty:"Информатика",},
+        // {name:"auditorium3", places:18, faculty:"Математика",},
+        // {name:"auditorium4", places:12, faculty:"Химия",}
+        // )
+        
+        // function show_auditory(arr){
+        //     console.log("Аудитория:\tКол-во мест:\tФакультет:");
+        //     for(i=0;i!=arr.length;++i){
+        //     console.log(arr[i].name+"\t"+arr[i].places+"\t\t"+arr[i].faculty);
+        //     }
+        // }
+
+        // function classrooms_for_the_faculty(academy,selected_faculty){
+        //     let x=""
+        //         for(i=0 ,j=0;i!=academy.length;++i){
+        //             if(academy[i].faculty==selected_faculty){
+        //             j++
+        //             x+=academy[i].name+"\n"
+        //         }
+        //     }
+        //     if(j==0)
+        //         console.log("\nАудиторий подходящих под факультет не найдено");
+        //     else{
+        //         console.log("\nАудитории подходящие под факультет:");
+        //         console.log(x)
+        //     }
+        // }
+
+        // function
+
+
+        // show_auditory(academy);
+        // classrooms_for_the_faculty(academy,"Химия");
+
+
+
+
+
+    </script>
+</body>
+</html>

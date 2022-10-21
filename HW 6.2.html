@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        document.write("Task 2<br> Создать массив, описывающий чек в магазине. <br>Каждый элемент массива состоит из названия товара, количества и цены за единицу товара. <br>Написать следующие функции:<br>1. Распечатка чека на экран. <br>2. Подсчет общей суммы покупки. <br>3. Получение самой дорогой покупки в чеке. <br>4. Подсчет средней стоимости одного товара в чеке.<br><br><b>От браузера зависит внешний вид выводимых данных, лучше всего результат выглядит в консоли Firefox</b>")
+        // Task 2
+        // Создать массив, описывающий чек в магазине. Каждый эле
+        // мент массива состоит из названия товара, количества и цены за
+        // единицу товара. Написать следующие функции.
+        // 1. Распечатка чека на экран.
+        // 2. Подсчет общей суммы покупки.
+        // 3. Получение самой дорогой покупки в чеке.
+        // 4. Подсчет средней стоимости одного товара в чеке.
+
+
+        
+        var sausage={
+            name:"Колбаса",  //товар
+            quantity:1,      //кол-во
+            cost:350,        //цена
+        }
+        var milk={
+            name:"Молоко",
+            quantity:2,
+            cost:45,
+        }
+        var bread={
+            name:"Хлеб",
+            quantity:2,
+            cost:25,
+        }
+
+        var check=new Array(sausage,milk,bread)
+
+        function show_check(arr){//Вывод в консоль всех товаров, их колличество и цена
+            let Text="Товар:\t\tкол-во:\tцена:\n"
+            
+            for(i=0;i!=arr.length;++i){//перебирает каждый элемент массива
+                Text+=("\n"+arr[i].name+"\t\t"+arr[i].quantity+"\t"+arr[i].cost)
+            }
+            console.log(Text);
+            return Text
+        }
+
+        function total_cost(arr){//расчет общей суммы покупки
+            let summ=0;
+            for(i=0;i!=arr.length;++i){//перебирает каждый элемент массива
+                summ+=(arr[i].cost*arr[i].quantity)
+            }
+            console.log("Общая сумма покупки:\t"+summ);
+            return("Общая сумма покупки:\t"+summ);
+        }
+
+        function max_cost(arr){//нахождение самого дорогого товара из списка
+            let x=arr[0]
+            for(i=1;i<arr.length;++i){//перебирает каждый элемент массива
+                if(x.cost<arr[i].cost){
+                    x=arr[i]
+                }
+            }
+            console.log("Самый дорогой товар:\t"+x.name);
+            return("Самый дорогой товар:\t"+x.name);
+        }
+
+        function average_price(arr){//расчет средней стоймости одного товара
+            let summ=0
+            let average
+            for(i=0;i!=arr.length;++i){//перебирает каждый элемент массива
+                summ+=arr[i].cost
+                average=summ/(i+1)
+            }
+            console.log("Средняя стоймость одного товара:\t"+average);
+            return("Средняя стоймость одного товара:\t"+average);
+        }
+
+
+        //вывод результата функций в консоль
+        show_check(check)//задание 1
+        total_cost(check)//задание 2
+        max_cost(check)//задание 3
+        average_price(check)//задание 4
+        alert(show_check(check)+"\n\n"+ total_cost(check)+"\n"+ max_cost(check)+"\n"+ average_price(check))
+
+    </script>
+</body>
+</html>
