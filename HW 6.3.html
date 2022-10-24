@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        button{
+            margin: 5px;
+        }
+        table{
+            border: 1px black solid;
+            border-collapse: collapse;
+        }
+        td{
+            padding:5px;
+            border: 1px black solid;
+            border-collapse: collapse;
+        }
+
+    </style>
+</head>
+<body>
+    <h3>Задание 4</h3>
+    <p>Создать массив аудиторий академии. Объект-аудитория состоит из названия, количества посадочных мест (от 10 до 20) и 
+    названия факультета, для которого она предназначена. 
+    Написать несколько функций для работы с ним.</p>
+    <ol>
+        <li>Вывод на экран всех аудиторий. </li>
+        <li>Вывод на экран аудиторий для указанного факультета.</li>
+        <li>Вывод на экран только тех аудиторий, которые подходят для переданной группы. Объект-группа состоит из названия, количества студентов и названия факультета.</li> 
+        <li>Функция сортировки аудиторий по количеству мест.</li>
+        <li>Функция сортировки аудиторий по названию (по алфавиту)</li>
+    </ol>
+    <div>
+        <button onclick="showAuditorium(list_of_audiences)">Показать все</button><br>
+        <button id="showAuditorium_of_faculty">Аудитории указаного факультета</button><br>
+        <button id="showAuditorium_for_group">Подходящие для группы аудитории</button><br>
+        <button id="sort_by_number_of_seats">Сортировать по количеству мест</button><br>
+        <button id="sorting_by_name">Сортировать по названию</button>
+    </div>
+    <h3 id="head">Список аудиторий</h3>
+    <table id="table">
+        <thead>
+            <td>№</td>
+            <td>Мест</td>
+            <td>Факультет</td>
+        </thead>
+    </table>
+
+
+    <script>
+        let list_of_audiences=new Array;//будет хранить массив аудиторий
+
+        class Auditorium {//создает объекты аудитории
+            constructor(name, places, faculty){
+                this.name=name;
+                this.places=places;
+                this.faculty=faculty;
+            }
+        }
+        
+        list_of_audiences=[                     //массово создал объекты прямо в массиве
+            auditorium1=new Auditorium("№112", 16, "Physics"),// по какой то причине синтаксис агрится на ключевые слова let var
+            auditorium2=new Auditorium("№214", 18, "Chemistry"),
+            auditorium3=new Auditorium("№131", 12, "Biology"),
+            auditorium4=new Auditorium("№217", 14, "Physics"),
+            auditorium5=new Auditorium("№227", 16, "Biology"),
+            auditorium6=new Auditorium("№226", 18, "Physics"),
+            auditorium7=new Auditorium("№139", 19, "Chemistry"),
+            auditorium8=new Auditorium("№227", 15, "Biology"),
+            auditorium9=new Auditorium("№117", 18, "Physics"),
+            auditorium10=new Auditorium("№247", 20, "Biology"),
+        ]
+        
+        function showAuditorium(list){//ввыводит массив в список
+            for(let i=0;i<list_of_audiences.length ;++i){
+                table.insertAdjacentHTML("beforeend", "<tr><td>"+list[i].name+"</td><td>"+list[i].places+"</td><td>"+list[i].faculty+"</td></tr>")
+            } 
+        }
+        showAuditorium(list_of_audiences)
+
+        
+        showAuditorium_of_faculty.onclick=function(e){
+            var userDate=prompt("Введите факультет для поиска", "Physics Biology Chemistry удалите лишние");
+            for(let i=0;i<list_of_audiences.length ;++i){
+                if(userDate==list_of_audiences[i].faculty){
+                    
+                }
+            }
+        }
+        console.log(table.children.length);
+        function removeElements(){
+            for(let i=0;i<table.children.length ;++i){
+                if(table.children[i]){
+                    
+                }
+            }
+            
+        }
+    </script>
+</body>
+</html>
