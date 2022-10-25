@@ -41,12 +41,15 @@
         <button id="sorting_by_name">Сортировать по названию</button>
     </div>
     <h3 id="head">Список аудиторий</h3>
-    <table id="table">
+    <table id="tableElement">
         <thead>
             <td>№</td>
             <td>Мест</td>
             <td>Факультет</td>
         </thead>
+        <tbody id="tbodyElement">
+
+        </tbody>
     </table>
 
 
@@ -75,28 +78,36 @@
         ]
         
         function showAuditorium(list){//ввыводит массив в список
+            tbodyElement.innerHTML="";
             for(let i=0;i<list_of_audiences.length ;++i){
-                table.insertAdjacentHTML("beforeend", "<tr><td>"+list[i].name+"</td><td>"+list[i].places+"</td><td>"+list[i].faculty+"</td></tr>")
+                tbodyElement.insertAdjacentHTML("beforeend", "<tr><td>"+list[i].name+"</td><td>"+list[i].places+"</td><td>"+list[i].faculty+"</td></tr>")
             } 
         }
         showAuditorium(list_of_audiences)
 
         
-        showAuditorium_of_faculty.onclick=function(e){
-            var userDate=prompt("Введите факультет для поиска", "Physics Biology Chemistry удалите лишние");
+        showAuditorium_of_faculty.onclick=function(){
+            var userDate=prompt("Введите факультет для поиска", "Physics Biology Chemistry (удалите лишние)");
+            tbodyElement.innerHTML="";
             for(let i=0;i<list_of_audiences.length ;++i){
                 if(userDate==list_of_audiences[i].faculty){
-                    
+                    tbodyElement.insertAdjacentHTML("beforeend", "<tr><td>"+list_of_audiences[i].name+"</td><td>"+list_of_audiences[i].places+"</td><td>"+list_of_audiences[i].faculty+"</td></tr>")
                 }
             }
         }
-        console.log(table.children.length);
-        function removeElements(){
-            for(let i=0;i<table.children.length ;++i){
-                if(table.children[i]){
-                    
+
+        showAuditorium_for_group.onclick=function(){
+            var groupSize=prompt("Введите количество студентов", "14");
+            var groupFaculty=prompt("Введите факультет группы", "Physics Biology Chemistry (удалите лишние)");
+            tbodyElement.innerHTML="";
+            for(let i=0;i<list_of_audiences.length ;++i){
+                if(groupFaculty==list_of_audiences[i].faculty && groupSize<=list_of_audiences[i].places){
+                    tbodyElement.insertAdjacentHTML("beforeend", "<tr><td>"+list_of_audiences[i].name+"</td><td>"+list_of_audiences[i].places+"</td><td>"+list_of_audiences[i].faculty+"</td></tr>")
                 }
             }
+        }
+
+        sort_by_number_of_seats.onclick=function(){
             
         }
     </script>
